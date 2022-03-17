@@ -19,7 +19,6 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/auth/', include('authentication.urls')),
-    path('api/get_all_comments/', include('get_all_comments.urls')),
-
+    path('api/youtube_clone/', include('youtube_clone.urls')),
 
 ]
