@@ -10,6 +10,6 @@ class CommentSerializer(serializers.ModelSerializer):
 class ReplySerializer(serializers.ModelSerializer):
     class Meta:
         model = Reply
-        exclude =('Comment')
+        # exclude =['Comment']
         fields =['id', 'user','comment', 'text']
         depth = 1
