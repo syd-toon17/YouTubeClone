@@ -59,11 +59,11 @@ def user_replies(request, comment_id):
 @permission_classes([IsAuthenticated])
 def comment_replies(request, comment_id):
     if request.method == 'GET':
-        new_data=request.data
-        new_data['comment_id'] = comment_id
+        #new_data=request.data
+        #new_data['comment_id'] = comment_id
         replies = Reply.objects.filter(comment_id=comment_id)
-        serializer = ReplySerializer(replies, data=new_data)
-        serializer.is_valid(raise_exception=True)
+        serializer = ReplySerializer(replies, many = True)
+        #serializer.is_valid(raise_exception=True)
         # serializer.save(user=request.user)
         return Response(serializer.data)
 
