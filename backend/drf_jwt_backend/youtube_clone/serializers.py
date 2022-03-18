@@ -7,9 +7,12 @@ class CommentSerializer(serializers.ModelSerializer):
         fields = ['id','user', 'video_id', 'text', 'likes', 'dislikes']
         depth = 1
         
+    comment_id = serializers.IntegerField(write_only = True)
 class ReplySerializer(serializers.ModelSerializer):
     class Meta:
         model = Reply
         # exclude =['Comment']
-        fields =['id', 'user','comment', 'text']
+        fields =['id', 'user','comment_id', 'text']
         depth = 1
+
+    comment_id = serializers.IntegerField(write_only = True)
