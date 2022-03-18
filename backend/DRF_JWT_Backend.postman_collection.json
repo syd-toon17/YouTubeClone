@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "d4409d57-7119-4339-bfae-1f3a18bc6341",
+		"_postman_id": "84663369-63f0-480e-affc-566257fe83fd",
 		"name": "DRF_JWT_Backend",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -219,6 +219,74 @@
 								""
 							]
 						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Youtube_Clone",
+			"item": [
+				{
+					"name": "Get_By_Video_Id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQ4NDg1MjAyLCJpYXQiOjE2NDc2MjEyMDIsImp0aSI6ImExZTQ0ZmU2ODhmOTRmOWY5OWEwOGI4Y2U3MjFiY2RmIiwidXNlcl9pZCI6MiwidXNlcm5hbWUiOiJkYW50aGVtYW4iLCJmaXJzdF9uYW1lIjoiRGFuaWVsIn0.8zk_Fds9btI56HH1Tue6ynfN6mrB4sscQVYyeCm5sjQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/youtube_clone/comment/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"youtube_clone",
+								"comment",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create_New_User_Comment",
+					"request": {
+						"method": "POST",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Create_New_Reply",
+					"request": {
+						"method": "POST",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Update_Comment_By_Id",
+					"request": {
+						"method": "PUT",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Get_Replies_By_Comment_Id",
+					"request": {
+						"method": "GET",
+						"header": []
 					},
 					"response": []
 				}
