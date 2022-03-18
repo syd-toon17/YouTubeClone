@@ -9,16 +9,9 @@ from .serializers import ReplySerializer
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
-def get_all_comments(request):
-    comments = Comment.objects.all()
+def get_by_video_id(request, video_id):
+    comments = Comment.objects.filter(video_id=video_id)
     serializer = CommentSerializer(comments, many=True)
-    return Response(serializer.data)
-
-@api_view(['GET'])
-@permission_classes([AllowAny])
-def get_all_replies(request):
-    replies = Reply.objects.all()
-    serializer = ReplySerializer(replies, many=True)
     return Response(serializer.data)
 
 @api_view(['GET', 'POST', 'PUT'])
@@ -65,9 +58,12 @@ def user_replies(request, comment_id):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def comment_replies(request, comment_id):
-    # print(
-    #   'User ', f"{request.user.id} {request.user.email} {request.user.username}")
-    request.method == 'GET'
-    replies = Reply.objects.filter(user_id=request.user.id)
-    serializer = ReplySerializer(replies, many=True)
-    return Response(serializer.data)
+    if request.method == 'GET':
+        new_data=request.data
+        new_data['comment_id'] = comment_id
+        replies = Reply.objects.filter(comment_id=comment_id)
+        serializer = ReplySerializer(replies, data=new_data)
+        serializer.is_valid(raise_exception=True)
+        # serializer.save(user=request.user)
+        return Response(serializer.data)
+
