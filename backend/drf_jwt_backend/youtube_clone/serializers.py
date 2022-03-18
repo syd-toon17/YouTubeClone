@@ -7,7 +7,6 @@ class CommentSerializer(serializers.ModelSerializer):
         fields = ['id','user', 'video_id', 'text', 'likes', 'dislikes']
         depth = 1
         
-    comment_id = serializers.IntegerField(write_only = True)
 class ReplySerializer(serializers.ModelSerializer):
     class Meta:
         model = Reply

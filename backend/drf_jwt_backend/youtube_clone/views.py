@@ -23,7 +23,7 @@ def get_all_replies(request):
 
 @api_view(['GET', 'POST', 'PUT'])
 @permission_classes([IsAuthenticated])
-def user_comments(request):
+def user_comments(request, comment_id):
     print(
         'User ', f"{request.user.id} {request.user.email} {request.user.username}")
     if request.method == 'POST':
@@ -37,7 +37,9 @@ def user_comments(request):
         serializer = CommentSerializer(comments, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     elif request.method == 'PUT' :
-        serializer = CommentSerializer(data=request.data)
+        new_data=request.data
+        new_data['comment_id'] = comment_id
+        serializer = CommentSerializer(data=new_data)
         if serializer.is_valid(raise_exception=True):
             serializer.save(user=request.user)
             return Response(serializer.data, status=status.HTTP_200_OK)
@@ -59,3 +61,13 @@ def user_replies(request, comment_id):
         replies = Reply.objects.filter(user_id=request.user.id)
         serializer = ReplySerializer(replies, many=True)
         return Response(serializer.data)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def comment_replies(request, comment_id):
+    # print(
+    #   'User ', f"{request.user.id} {request.user.email} {request.user.username}")
+    request.method == 'GET'
+    replies = Reply.objects.filter(user_id=request.user.id)
+    serializer = ReplySerializer(replies, many=True)
+    return Response(serializer.data)
