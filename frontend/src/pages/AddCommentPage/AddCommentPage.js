@@ -7,7 +7,7 @@ import useCustomForm from "../../hooks/useCustomForm";
 
 let initialValues = {
     user: "",
-    videoId: "",
+    video_id: "",
     text: "",
     likes: "",
     dislikes: "",
@@ -17,17 +17,19 @@ const AddCommentPage = (props) => {
     const [user,token] = useAuth()
     const navigate = useNavigate()
     const [formData, handleInputChange, handleSubmit] = useCustomForm(initialValues, postNewComment)
-    const comment_id = 0
+    
 
     async function postNewComment(){
         try {
-            let response = await axios.post("http://127.0.0.1:8000/api/youtube_clone/new_comment/", formData, comment_id, {
+            let response = await axios.post("http://127.0.0.1:8000/api/youtube_clone/add_comment/", formData, {
                 headers: {
-                    Authorization: 'Bearer ' + props.token
+                    Authorization: 'Bearer ' + token
                 }
             })
             navigate("/")
         } catch (error) {
+            console.log(token)
+            console.log(formData)
             console.log(error.message)
         }
     }
@@ -57,8 +59,8 @@ const AddCommentPage = (props) => {
               VideoId:{""}
               <input
                 type="text"
-                name="videoId"
-                value={formData.videoId}
+                name="video_id"
+                value={formData.video_id}
                 onChange={handleInputChange}
               />
             </label>
