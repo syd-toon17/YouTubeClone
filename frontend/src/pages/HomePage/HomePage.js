@@ -16,7 +16,7 @@ const HomePage = () => {
   useEffect(() => {
     const fetchCars = async () => {
       try {
-        let response = await axios.get("http://127.0.0.1:8000/api/cars/", {
+        let response = await axios.post("http://127.0.0.1:8000/api/auth/login/", {
           headers: {
             Authorization: "Bearer " + token,
           },
@@ -31,7 +31,7 @@ const HomePage = () => {
   return (
     <div className="container">
       <h1>Home Page for {user.username}!</h1>
-      <Link to="/addcomment">Add Comment</Link>
+      <Link to="/addcomment" token={token}>Add Comment</Link>
       {cars &&
         cars.map((car) => (
           <p key={car.id}>
