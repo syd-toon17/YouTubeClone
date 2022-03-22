@@ -3,9 +3,10 @@ import { Routes, Route } from "react-router-dom";
 import "./App.css";
 
 // Pages Imports
-import VideoPage from "./pages/VideoPage/VideoPage";
+import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
+// import VideoPage from
 
 // Component Imports
 import Navbar from "./components/NavBar/NavBar";
@@ -25,14 +26,14 @@ function App() {
           path="/"
           element={
             // <PrivateRoute>
-               <VideoPage />
+               <HomePage />
             // </PrivateRoute>
           }
           
         />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/video" element={<VideoPage />} />
+        {/* <Route path="/video" element={<VideoPage />} /> */}
         <Route 
           path='/add_comment'
           element={

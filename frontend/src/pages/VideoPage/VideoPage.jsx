@@ -1,23 +1,12 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
+import AuthContext from "../../context/AuthContext";
+import useCustomForm from "../../hooks/useCustomForm";
 import { Link } from "react-router-dom";
 
-import axios from "axios";
-import useAuth from "../../hooks/useAuth";
-
 const VideoPage = () => {
-  // The "user" value from this Hook contains the decoded logged in user information (username, first name, id)
-  // The "token" value is the JWT token that you will send in the header of any request requiring authentication
-  const [user, token] = useAuth();
-  console.log(user);
-  console.log(token);
 
-  return (
-    <div className="container">
-      <h1>Home Page for Youtube Clone!</h1>
-      
-    </div>
-  );
-};
+}
 
-export default VideoPage;
+
+// come to this page after successful login
+// this page should hold a specifc video, related videos, comments, likes and dislikes
