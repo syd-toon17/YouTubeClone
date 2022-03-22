@@ -23,6 +23,11 @@ function App() {
       <Routes>
         <Route
           path="/"
+          element={
+            // <PrivateRoute>
+               <VideoPage />
+            // </PrivateRoute>
+          }
           
         />
         <Route path="/register" element={<RegisterPage />} />
