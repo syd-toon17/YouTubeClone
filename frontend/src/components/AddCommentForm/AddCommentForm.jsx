@@ -13,7 +13,7 @@ let initialValues = {
     dislikes: "",
 };
 
-const AddCommentPage = (props) => {
+const AddCommentForm = (props) => {
     const [user,token] = useAuth()
     const navigate = useNavigate()
     const [formData, handleInputChange, handleSubmit] = useCustomForm(initialValues, postNewComment)
@@ -91,4 +91,4 @@ const AddCommentPage = (props) => {
       );
 }
 
-export default AddCommentPage
+export default AddCommentForm

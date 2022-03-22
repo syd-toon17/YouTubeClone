@@ -3,14 +3,14 @@ import { Routes, Route } from "react-router-dom";
 import "./App.css";
 
 // Pages Imports
-import HomePage from "./pages/HomePage/HomePage";
+import VideoPage from "./pages/VideoPage/VideoPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
-import AddCommentPage from "./pages/AddCommentPage/AddCommentPage";
 
 // Component Imports
 import Navbar from "./components/NavBar/NavBar";
 import Footer from "./components/Footer/Footer";
+import AddCommentForm from "./components/AddCommentForm/AddCommentForm";
 
 // Util Imports
 import PrivateRoute from "./utils/PrivateRoute";
@@ -24,7 +24,7 @@ function App() {
           path="/"
           element={
             <PrivateRoute>
-              <HomePage />
+              <VideoPage />
             </PrivateRoute>
           }
         />
@@ -34,7 +34,7 @@ function App() {
           path='/addcomment' 
           element={
             <PrivateRoute>
-              <AddCommentPage />
+              <AddCommentForm />
             </PrivateRoute>
           }
       />
