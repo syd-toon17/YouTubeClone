@@ -30,7 +30,7 @@ const VideoPage = () => {
   return (
     <div className="container">
       <h1>Home Page for {user.username}!</h1>
-      <Link to="/addcomment" token={token}>Add Comment</Link>
+      <Link to="/add_comment" token={token}>Add Comment</Link>
       {/* {cars &&
         cars.map((car) => (
           <p key={car.id}>

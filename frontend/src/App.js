@@ -11,6 +11,7 @@ import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import Navbar from "./components/NavBar/NavBar";
 import Footer from "./components/Footer/Footer";
 import AddCommentForm from "./components/AddCommentForm/AddCommentForm";
+import AddReplyForm from "./components/AddReplyForm/AddReplyForm";
 
 // Util Imports
 import PrivateRoute from "./utils/PrivateRoute";
@@ -22,19 +23,24 @@ function App() {
       <Routes>
         <Route
           path="/"
-          element={
-            <PrivateRoute>
-              <VideoPage />
-            </PrivateRoute>
-          }
+          
         />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/video" element={<VideoPage />} />
         <Route 
-          path='/addcomment' 
+          path='/add_comment'
           element={
             <PrivateRoute>
               <AddCommentForm />
+            </PrivateRoute>
+          }
+      />
+        <Route 
+          path='/add_reply' 
+          element={
+            <PrivateRoute>
+              <AddReplyForm />
             </PrivateRoute>
           }
       />

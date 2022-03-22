@@ -16,8 +16,10 @@ def get_by_video_id(request, video_id):
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
-def add_comment(request):
+def add_comment(request, video_id):
     if request.method == 'POST':
+        new_data=request.data
+        new_data['video_id'] = video_id
         serializer = CommentSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save(user=request.user)
