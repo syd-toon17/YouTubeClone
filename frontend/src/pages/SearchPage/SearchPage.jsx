@@ -3,38 +3,40 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { api_key } from "../../localsettings";
 import VideoPlayer from "../../components/VideoPlayer/VideoPlayer";
-import SearchBar from "../../components/SearchBar/SearchBar";
+
+
 
 
 const SearchPage = (props) =>{
 
 
-    const [setsearchResults] = useState([]);
-
-    useEffect(() => {
-        searchResults()
-    }, [])
-    async function searchResults(searchTerm='bob ross'){
-        let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&type=video&part=snippet&key=${api_key}`);
-        console.log(response.data.items)
-        setsearchResults(response.data.items)
-      }
+   const handleClick = (event, id, title, description) => {
+   event.preventDefault();
+   props.setCurrentVideoId(id);
+   props.setCurrentVideoTitle(title);
+   props.setCurrentVideoDescription(description);
+   console.log(id, title, description)
+   }
 
     return (
     <div>
         <div className="container">
             <h1>Here are some videos based on your search!</h1>
-            <SearchBar searchRequest={SearchBar}/>
+            
         </div>
         <div>   
             <table> 
                 <tbody>
-                {props.video.map((video, index) => {
+                {props.searchResults.map((video, index) => {
                     return(
+
+                        
                         <tr key={index}>
-                            <td>{video.title}</td>
-                            <td>{video.description}</td>
-                            <td>{video.thumbnail}</td>
+                            <td>{video.snippet.title}</td>
+                            <td>{video.snippet.description}</td>
+                            <input type="image" src={video.snippet.thumbnails.medium.url} 
+                            onClick={(event) => handleClick(event, video.id.videoId, video.snippet.title, video.snippet.description)}
+                            />
                         </tr>
                     )
                 })}
