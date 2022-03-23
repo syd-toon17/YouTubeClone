@@ -8,12 +8,15 @@ import axios from "axios";
 
 const HomePage = () => {
 
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchRequest, setSearchResults] = useState([]);
 
   useEffect(() => {
     getSearchResults()
   }, [])
 
+
+  // this is the home page suggested video
+  // if they select this video it should take them to the VideoPage which will offer realated videos, comments, and replies
   async function getSearchResults(searchTerm='bob ross'){
     let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&type=video&part=snippet&key=${api_key}`);
     console.log(response.data.items)
