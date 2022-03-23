@@ -1,20 +1,28 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { api_key } from "../../localsettings";
+import SearchBar from "../../components/SearchBar/SearchBar";
 
 import axios from "axios";
-import useAuth from "../../hooks/useAuth";
 
 const HomePage = () => {
-  // The "user" value from this Hook contains the decoded logged in user information (username, first name, id)
-  // The "token" value is the JWT token that you will send in the header of any request requiring authentication
-  // const [user, token] = useAuth();
-  // console.log(user);
-  // console.log(token);
 
+  const [searchResults, setSearchResults] = useState([]);
+
+  useEffect(() => {
+    getSearchResults()
+  }, [])
+
+  async function getSearchResults(searchTerm='bob ross'){
+    let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&type=video&part=snippet&key=${api_key}`);
+    console.log(response.data.items)
+    setSearchResults(response.data.items)
+  }
   return (
     <div className="container">
       <h1>Home Page for Youtube Clone!</h1>
+      <SearchBar getSearchResults={getSearchResults}/>
       
     </div>
   );

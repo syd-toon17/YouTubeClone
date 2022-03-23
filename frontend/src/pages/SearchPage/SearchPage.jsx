@@ -1,11 +1,29 @@
-import React, { useContext, useEffect } from "react";
-import AuthContext from "../../context/AuthContext";
-import useCustomForm from "../../hooks/useCustomForm";
-import { Link } from "react-router-dom";
+import React from "react";
+import VideoPlayer from "../../components/VideoPlayer/VideoPlayer";
 
-const SearchPage = () =>{
+const SearchPage = (props) =>{
 
+    return (
+        <div>   
+                <table> 
+                    <tbody>
+                    {props.video.map((video, index) => {
+                        return(
+                            <tr key={index}>
+                                <td>{video.title}</td>
+                                <td>{video.description}</td>
+                                <td>{video.thumbnail}</td>
+                            </tr>
+                        )
+                    })}
+                    </tbody>
+                </table>
+
+        </div>
+    )
 }
+    
+
 
 // this page should have a search bar
 // be able to take in keyword searches (not search by video_id)
@@ -13,3 +31,4 @@ const SearchPage = () =>{
 // then take user to specific video page
 // use filter to search?
 
+export default SearchPage
