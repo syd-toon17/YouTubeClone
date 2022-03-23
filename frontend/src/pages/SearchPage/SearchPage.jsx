@@ -1,10 +1,4 @@
 import React from "react";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { api_key } from "../../localsettings";
-import VideoPlayer from "../../components/VideoPlayer/VideoPlayer";
-
-
 
 
 const SearchPage = (props) =>{
@@ -29,7 +23,6 @@ const SearchPage = (props) =>{
                 <tbody>
                 {props.searchResults.map((video, index) => {
                     return(
-
                         
                         <tr key={index}>
                             <td>{video.snippet.title}</td>
