@@ -16,7 +16,7 @@ import SearchPage from './pages/SearchPage/SearchPage';
 import Navbar from "./components/NavBar/NavBar";
 import Footer from "./components/Footer/Footer";
 import AddCommentForm from "./components/AddCommentForm/AddCommentForm";
-// import AddReplyForm from "./components/AddReplyForm/AddReplyForm";
+import AddReplyForm from "./components/AddReplyForm/AddReplyForm";
 import SearchBar from "./components/SearchBar/SearchBar";
 import VideoPlayer from "./components/VideoPlayer/VideoPlayer";
 
@@ -27,33 +27,42 @@ import RelatedVideos from "./components/RelatedVideos/RelatedVideos";
 function App() {
   
   const [searchResults, setSearchResults] = useState([]);
-  const [currentVideoId, setCurrentVideoId] = useState(['lLWEXRAnQd0']); // this is coming from the user clicking on thumbnail
-  const [currentVideoTitle, setCurrentVideoTitle] = useState(["Bob Ross - Island in the Wilderness (Season 29 Episode 1)"]); // same
-  const [currentVideoDescription, setCurrentVideoDescription] = useState(["Take a walk with Bob Ross down a little lakeside path in a secluded place; you'll delight in the discovery of a small uninhabited"]); // same
+  const [currentVideoId, setCurrentVideoId] = useState('lLWEXRAnQd0'); // this is coming from the user clicking on thumbnail
+  const [currentVideoTitle, setCurrentVideoTitle] = useState(""); // same
+  const [currentVideoDescription, setCurrentVideoDescription] = useState(""); // same
   const [relatedVideos, setRelatedVideos] = useState([]);
+  
+
+  // useEffect(() => {
+  //   getSearchResults()
+  // }, [])
 
   useEffect(() => {
-    getSearchResults()
-  }, [])
+    // getSearchResults()
+    getRelatedVideos()
+  },[])
 
-  useEffect(() => {
-    getRelatedVideos(currentVideoId)
-  }, [])
-
-
+  function changeCurrentVid (id){
+    setCurrentVideoId(id)
+    getRelatedVideos()
+  }
 // note is for the display search resutls Component, when you map over this data you will need to use . notation to access all of the info
 // refrer to the individual objecs you are mapping over as video
 // we can access the snippet data and set it equal to src={video.snippet.thumbnails.medium.url}
 // each item should have a thumbnail, title and description
 async function getSearchResults(searchTerm='bob ross'){
   let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&type=video&part=snippet&key=${api_key}`);
-  console.log("got search results")
+  console.log(response.data.items)
+ 
   setSearchResults(response.data.items)
 }
 
-async function getRelatedVideos(currentVideoId= 'Z-vFWuOHkHQ'){
-  let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${currentVideoId}&type=video&part=snippet&key=${api_key}`);
-  console.log("got related videos")
+async function getRelatedVideos(){
+  let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?relatedToVideoId=${currentVideoId}&type=video&part=snippet&key=${api_key}`);
+  console.log(response.data.items)
+  // setCurrentVideoId(response.data.items[0].id.videoId)
+  setCurrentVideoDescription(response.data.items[0].snippet.description)
+  setCurrentVideoTitle(response.data.items[0].snippet.title)
   setRelatedVideos(response.data.items)
 }
 
@@ -77,7 +86,6 @@ async function getRelatedVideos(currentVideoId= 'Z-vFWuOHkHQ'){
           />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
-        {/* <Route path="/video" element={<VideoPage />} /> */}
         <Route 
           path='/add_comment'
           element={
@@ -86,14 +94,14 @@ async function getRelatedVideos(currentVideoId= 'Z-vFWuOHkHQ'){
             </PrivateRoute>
           }
       />
-        {/* <Route 
+        <Route 
           path='/add_reply' 
           element={
             <PrivateRoute>
               <AddReplyForm />
             </PrivateRoute>
           }
-      /> */}
+      />
       </Routes>
       <VideoPlayer 
       currentVideoDescription={currentVideoDescription}
@@ -102,10 +110,13 @@ async function getRelatedVideos(currentVideoId= 'Z-vFWuOHkHQ'){
 
       />
       <RelatedVideos 
+      currentVideoId={currentVideoId}
       relatedVideos = {relatedVideos}
       setCurrentVideoId = {setCurrentVideoId}
       setCurrentVideoTitle = {setCurrentVideoTitle}
-      setCurrentVideoDescription = {setCurrentVideoDescription} />
+      setCurrentVideoDescription = {setCurrentVideoDescription} 
+      changeCurrentVid = {changeCurrentVid}
+      />
       <SearchPage 
       searchResults={searchResults} 
       setCurrentVideoDescription ={setCurrentVideoDescription}

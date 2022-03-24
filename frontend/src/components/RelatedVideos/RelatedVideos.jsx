@@ -6,9 +6,9 @@ const RelatedVideos = (props) =>{
 
    const handleClick = (event, id, title, description) => {
    event.preventDefault();
-   props.setCurrentVideoId(id);
-   props.setCurrentVideoTitle(title);
-   props.setCurrentVideoDescription(description);
+//    props.setCurrentVideoTitle(title);
+//    props.setCurrentVideoDescription(description);
+   props.changeCurrentVid(id);
    
    console.log(id, title, description)
    }
@@ -19,12 +19,13 @@ const RelatedVideos = (props) =>{
     <div>
         <div className="container">
             <h1>Here are some videos related to your selection!</h1>
-            
+            {console.log('RELATED VIDS',props.relatedVideos)}
         </div>
         <div>   
             <table> 
                 <tbody>
-                {props.relatedVideos.map((currentVideo, index) => {
+                {
+                props.relatedVideos.map((currentVideo, index) => {
                     return(
 
                         
