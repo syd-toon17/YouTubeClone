@@ -15,7 +15,7 @@ const SearchPage = (props) =>{
     return (
     <div>
         <div className="container">
-            <h1>Here are some videos based on your search!</h1>
+            <h1>Here are your search results!</h1>
             
         </div>
         <div>   
