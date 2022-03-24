@@ -130,4 +130,4 @@ dist
 .pnp.*
 
 # Local Settings
-frontend/src/localsettings.js
+src/localsettings.js
