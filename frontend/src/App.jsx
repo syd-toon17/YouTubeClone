@@ -87,14 +87,14 @@ async function getRelatedVideos(id){
           />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route 
+        {/* <Route 
           path='/add_comment'
           element={
             <PrivateRoute>
               <AddCommentForm />
             </PrivateRoute>
           }
-      />
+      /> */}
         <Route 
           path='/add_reply' 
           element={
@@ -108,8 +108,9 @@ async function getRelatedVideos(id){
       currentVideoDescription={currentVideoDescription}
       currentVideoId={currentVideoId}
       currentVideoTitle={currentVideoTitle}
-
+      
       />
+      
       <RelatedVideos 
       currentVideoId={currentVideoId}
       relatedVideos = {relatedVideos}
