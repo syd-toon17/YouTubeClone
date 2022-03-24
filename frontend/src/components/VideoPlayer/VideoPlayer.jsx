@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-
+import AddCommentForm from '../AddCommentForm/AddCommentForm';
+import AddReplyForm from '../AddReplyForm/AddReplyForm';
 
 const VideoPlayer = (props) => {
 
@@ -14,6 +15,7 @@ const videoId = props.currentVideoId
   frameborder="0"></iframe>
   <p>{props.currentVideoDescription}</p>
         </div>
+        
     );
 }
 

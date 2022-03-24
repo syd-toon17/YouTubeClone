@@ -26,9 +26,9 @@ const RelatedVideos = (props) =>{
                 <tbody>
                 {
                 props.relatedVideos.map((currentVideo, index) => {
-                    return(
+                    if(currentVideo.snippet){
+                        return(
 
-                        
                         <tr key={index}>
                             <td>{currentVideo.snippet.title}</td>
                             <input type="image" src={currentVideo.snippet.thumbnails.medium.url} 
@@ -36,6 +36,10 @@ const RelatedVideos = (props) =>{
                             />
                         </tr>
                     )
+                    }
+                    else{
+                        return null
+                    }
                 })}
                 </tbody>
             </table>
