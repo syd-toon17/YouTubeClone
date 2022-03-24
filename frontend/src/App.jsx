@@ -30,7 +30,7 @@ function App() {
   const [currentVideoId, setCurrentVideoId] = useState(['lLWEXRAnQd0']); // this is coming from the user clicking on thumbnail
   const [currentVideoTitle, setCurrentVideoTitle] = useState(["Bob Ross - Island in the Wilderness (Season 29 Episode 1)"]); // same
   const [currentVideoDescription, setCurrentVideoDescription] = useState(["Take a walk with Bob Ross down a little lakeside path in a secluded place; you'll delight in the discovery of a small uninhabited"]); // same
-  const [relatedVideos, setRelatedVideos] = useState(['currentVideoId']);
+  const [relatedVideos, setRelatedVideos] = useState([]);
 
   useEffect(() => {
     getSearchResults()
@@ -38,7 +38,7 @@ function App() {
 
   useEffect(() => {
     getRelatedVideos(currentVideoId)
-  }, [currentVideoId])
+  }, [])
 
 
 // note is for the display search resutls Component, when you map over this data you will need to use . notation to access all of the info
@@ -47,13 +47,13 @@ function App() {
 // each item should have a thumbnail, title and description
 async function getSearchResults(searchTerm='bob ross'){
   let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&type=video&part=snippet&key=${api_key}`);
-  console.log(response.data.items)
+  console.log("got search results")
   setSearchResults(response.data.items)
 }
 
 async function getRelatedVideos(currentVideoId= 'Z-vFWuOHkHQ'){
   let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${currentVideoId}&type=video&part=snippet&key=${api_key}`);
-  console.log(response.data.items)
+  console.log("got related videos")
   setRelatedVideos(response.data.items)
 }
 
@@ -99,9 +99,13 @@ async function getRelatedVideos(currentVideoId= 'Z-vFWuOHkHQ'){
       currentVideoDescription={currentVideoDescription}
       currentVideoId={currentVideoId}
       currentVideoTitle={currentVideoTitle}
-      // relatedVideos={relatedVideos}
+
       />
-      <RelatedVideos relatedVideos = {relatedVideos} />
+      <RelatedVideos 
+      relatedVideos = {relatedVideos}
+      setCurrentVideoId = {setCurrentVideoId}
+      setCurrentVideoTitle = {setCurrentVideoTitle}
+      setCurrentVideoDescription = {setCurrentVideoDescription} />
       <SearchPage 
       searchResults={searchResults} 
       setCurrentVideoDescription ={setCurrentVideoDescription}

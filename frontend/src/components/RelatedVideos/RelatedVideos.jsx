@@ -4,13 +4,16 @@ import React from "react";
 const RelatedVideos = (props) =>{
 
 
-   const handleClick = (event, id, title) => {
+   const handleClick = (event, id, title, description) => {
    event.preventDefault();
-   props.currentVideoId(id);
-   props.currentVideoTitle(title);
+   props.setCurrentVideoId(id);
+   props.setCurrentVideoTitle(title);
+   props.setCurrentVideoDescription(description);
    
-   console.log(id, title)
+   console.log(id, title, description)
    }
+
+  
 
     return (
     <div>
@@ -21,14 +24,14 @@ const RelatedVideos = (props) =>{
         <div>   
             <table> 
                 <tbody>
-                {props.relatedVideos.map((video, index) => {
+                {props.relatedVideos.map((currentVideo, index) => {
                     return(
 
                         
                         <tr key={index}>
-                            <td>{video.snippet.title}</td>
-                            <input type="image" src={video.snippet.thumbnails.medium.url} 
-                            onClick={(event) => handleClick(event, video.id.videoId, video.snippet.title)}
+                            <td>{currentVideo.snippet.title}</td>
+                            <input type="image" src={currentVideo.snippet.thumbnails.medium.url} 
+                            onClick={(event) => handleClick(event, currentVideo.id.videoId, currentVideo.snippet.title, currentVideo.snippet.description)}
                             />
                         </tr>
                     )
